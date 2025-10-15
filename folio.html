@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sha Azis Shanavas — AI & Data Science Portfolio</title>
+  <meta name="description" content="Portfolio of Sha Azis Shanavas — AI & Data Science student. Projects: Portfolio site, Power BI dashboard, Document Analysis Chatbot.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- load libs deferred -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js" defer></script>
+  <script src="https://unpkg.com/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js" defer></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
+
+  <style>
+    :root{
+      --bg:#04121a;
+      --panel:#081621;
+      --muted:#97a6b7;
+      --accent-start:#00C9A7; /* emerald */
+      --accent-end:#007CF0;   /* teal/blue */
+      --glass: rgba(255,255,255,0.03);
+      --text:#e6eef8;
+      --radius:14px;
+      --max-width:1200px;
+      --glow: 0 18px 50px rgba(0,201,167,0.08);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#021019);color:var(--text);-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .container{max-width:var(--max-width);margin:0 auto;padding:28px;position:relative;z-index:6}
+
+    /* Particles */
+    #particles-js{position:fixed;inset:0;z-index:0}
+
+    /* Loader */
+    .loader-wrapper{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);z-index:9999;transition:opacity .35s}
+    .loader{display:flex;align-items:center;gap:14px}
+    .loader-inner{width:68px;height:68px;border-radius:12px;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));display:flex;align-items:center;justify-content:center;font-weight:700;color:white;box-shadow:var(--glow);font-family:'JetBrains Mono'}
+    .loader-text{font-family:'JetBrains Mono';line-height:1;color:var(--text)}
+
+    /* Header */
+    header{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));display:flex;align-items:center;justify-content:center;color:white;box-shadow:var(--glow);font-weight:700;font-family:'JetBrains Mono'}
+    nav{display:flex;gap:8px;align-items:center}
+    .nav-item{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-size:14px}
+    .nav-item.active,.nav-item:hover{background:var(--glass);color:var(--text)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center;padding:34px 0;position:relative;z-index:5}
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:24px;border-radius:var(--radius);backdrop-filter: blur(6px);box-shadow:0 8px 36px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.03)}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted);font-size:12px}
+    h1{margin:6px 0 4px;font-size:28px}
+    .accent{color:var(--accent-start)}
+    .title{font-size:16px;color:var(--muted)}
+    .hero-description{margin-top:12px;color:var(--muted);line-height:1.45}
+    .tech-stack{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .tech-badge{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:8px;font-size:13px}
+    .social-links{margin-top:12px;display:flex;gap:8px}
+    .social-link{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,0.02);color:var(--muted);text-decoration:none}
+    .social-link:hover{background:linear-gradient(135deg,var(--accent-start),var(--accent-end));color:white;box-shadow:var(--glow)}
+
+    /* Floating icons (decor) */
+    .floating-icons{position:absolute;left:18px;top:30px;display:flex;flex-direction:column;gap:10px;z-index:4}
+    .float-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;justify-content:center;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+
+    /* Code editor */
+    .code-editor{border-radius:12px;overflow:hidden;cursor:grab}
+    .editor-header{display:flex;align-items:center;gap:12px;padding:10px 14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)}
+    .dots{display:flex;gap:8px}
+    .dot{width:12px;height:12px;border-radius:50%}
+    .dot.red{background:#ef4444}
+    .dot.yellow{background:#f59e0b}
+    .dot.green{background:#22c55e}
+    .editor-content{padding:18px;background:linear-gradient(180deg, rgba(0,0,0,0.14), transparent);color:#c7d2fe;font-family:'JetBrains Mono',monospace;min-height:220px}
+    pre{margin:0;font-size:13px;line-height:1.45;white-space:pre-wrap}
+
+    /* Profile image container (large-image friendly) */
+    .profile-wrap{display:flex;align-items:center;gap:18px}
+    .profile-image{width:160px;height:160px;border-radius:50%;overflow:hidden;flex-shrink:0;border:4px solid rgba(0,0,0,0.25);box-shadow:0 14px 40px rgba(0,124,240,0.06);background:linear-gradient(135deg,var(--accent-start),var(--accent-end));display:flex;align-items:center;justify-content:center}
+    .profile-image img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
+    /* make the frame glow and scale on hover */
+    .profile-image:hover{transform:translateY(-6px);box-shadow:0 26px 60px rgba(0,124,240,0.12);transition:all .28s}
+
+    /* About / stats */
+    .about{padding:24px 0}
+    .about-text{flex:1}
+    .about-stats{display:flex;gap:12px;margin-top:14px}
+    .stat-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:12px;border-radius:12px;text-align:center;min-width:110px}
+
+    /* work / filters */
+    .work{display:flex;gap:20px;margin-top:18px}
+    .work-sidebar{width:260px}
+    .filter-group{padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)}
+    .filter-btn{width:100%;display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:transparent;border:none;color:var(--muted);cursor:pointer;margin-top:8px}
+    .filter-btn.active{background:linear-gradient(90deg,rgba(0,201,167,0.12),rgba(0,124,240,0.04));color:var(--text)}
+    .work-content{flex:1}
+    .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+    .work-card{border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);overflow:hidden;transition:transform .28s, box-shadow .28s}
+    .work-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(2,6,23,0.6)}
+    .work-preview img{width:100%;height:160px;object-fit:cover;display:block}
+    .work-info{padding:12px}
+    .work-tech{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+
+    /* skills infographic */
+    .skills-visual{display:flex;gap:16px;align-items:center}
+    .skill-ring{width:120px;height:120px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);box-shadow:0 8px 30px rgba(2,6,23,0.5)}
+    .skill-list{flex:1}
+    .skill-item{display:flex;align-items:center;justify-content:space-between;margin:8px 0}
+    .bar{height:8px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;width:48%}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-start),var(--accent-end));border-radius:999px}
+
+    /* assistant */
+    .ai-assistant-container{position:fixed;right:20px;bottom:20px;z-index:60}
+    .ai-assistant-bubble{width:64px;height:64px;border-radius:999px;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));display:flex;align-items:center;justify-content:center;color:white;box-shadow:var(--glow);cursor:pointer;position:relative}
+    .ai-assistant-chat{position:fixed;right:20px;bottom:100px;width:360px;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.4));border-radius:12px;padding:0;display:none;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(2,6,23,0.6)}
+    .ai-assistant-chat.open{display:flex}
+    .chat-header{padding:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .chat-messages{padding:12px;max-height:260px;overflow:auto}
+    .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,0.03)}
+    textarea{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);resize:none}
+
+    /* footer */
+    footer{margin-top:36px;padding:22px;border-top:1px solid rgba(255,255,255,0.02)}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+
+    /* responsive */
+    @media (max-width:1024px){.hero{grid-template-columns:1fr}.work-grid{grid-template-columns:repeat(2,1fr)}.skills-visual{flex-direction:row}}
+    @media (max-width:640px){nav{display:none}.work-grid{grid-template-columns:1fr}.skills-visual{flex-direction:column}.profile-image{width:120px;height:120px}}
+    a:focus,button:focus,textarea:focus{outline:3px solid rgba(0,201,167,0.14);outline-offset:2px}
+  </style>
+</head>
+<body>
+  <!-- Particles -->
+  <div id="particles-js" aria-hidden="true"></div>
+
+  <!-- Loader -->
+  <div class="loader-wrapper" id="loaderWrapper" role="status" aria-live="polite">
+    <div class="loader">
+      <div class="loader-inner">SA</div>
+      <div class="loader-text">Sha Azis<br/>Shanavas</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden>SA</div>
+        <div>
+          <div style="font-size:14px;font-weight:600">Sha Azis Shanavas</div>
+          <div style="font-size:12px;color:var(--muted)">AI & Data Science</div>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a class="nav-item active" href="#home"><i class="ri-home-4-fill"></i> Home</a>
+        <a class="nav-item" href="#about"><i class="ri-user-line"></i> About</a>
+        <a class="nav-item" href="#work"><i class="ri-briefcase-4-fill"></i> Journey</a>
+        <a class="nav-item" href="#projects"><i class="ri-terminal-box-fill"></i> Projects</a>
+        <a class="nav-item" href="#contact"><i class="ri-mail-line"></i> Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home" aria-label="Home">
+      <!-- left content -->
+      <div class="panel" data-tilt data-tilt-max="6" data-tilt-speed="600">
+        <div class="badge">Welcome to my portfolio</div>
+        <h1>Sha Azis <span class="accent">Shanavas</span></h1>
+        <p class="title">I build ML models, dashboards & web tools for real-world data problems</p>
+
+        <p class="hero-description">B.Tech (AI & Data Science) student — experience in building dashboards, document-analysis chatbots and web projects. Passionate about turning data into action.</p>
+
+        <div style="display:flex;gap:12px;align-items:center;margin-top:14px">
+          <div class="tech-stack">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Power BI</span>
+            <span class="tech-badge">SQL</span>
+          </div>
+
+          <div style="margin-left:auto" class="social-links" aria-hidden>
+            <a class="social-link" href="https://github.com/Shaazis120204" target="_blank" rel="noopener" aria-label="GitHub"><i class="ri-github-fill"></i></a>
+            <a class="social-link" href="https://www.linkedin.com/in/sha-azis-s-5ba26b24a/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:18px">
+          <a class="btn primary" href="#contact"><i class="ri-send-plane-fill"></i> Get in touch</a>
+          <a class="btn ghost" href="Azzuu Normal Resume (3).pdf" download><i class="ri-download-2-line"></i> Download Resume</a>
+        </div>
+      </div>
+
+      <!-- right content: profile + code preview -->
+      <aside style="display:flex;flex-direction:column;gap:14px">
+        <div class="panel profile-wrap" data-tilt data-tilt-max="6" data-tilt-speed="600">
+          <!-- Profile image placeholder: replace src with your full-res image (e.g. shaazis.jpg) -->
+          <div class="profile-image" title="Profile photo">
+            <img src="profile.jpeg" alt="Sha Azis Shanavas" loading="lazy">
+          </div>
+
+          <div style="flex:1">
+            <div style="font-size:16px;font-weight:600">Sha Azis Shanavas</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">AI & Data Science • Data Analyst • AI Engineer</div>
+            <div style="margin-top:10px;color:var(--muted);font-size:13px">Location: Trichy, Tamil Nadu</div>
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <a class="tech-badge" href="mailto:shaazisofficial02@gmail.com"><i class="ri-mail-line"></i> Email</a>
+              <a class="tech-badge" href="tel:+919629586513"><i class="ri-phone-line"></i> Call</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-editor panel" aria-hidden>
+          <div class="editor-header">
+            <div class="dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <span class="filename">shaazis</span>
+          </div>
+          <div class="editor-content">
+<pre><code>// Document QA (conceptual)
+// Load documents → embeddings → retrieval → answer
+// Python / Sentence Embeddings
+
+def preprocess(text):
+  # clean, chunk, vectorize
+  pass
+</code></pre>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about" aria-label="About">
+      <div style="display:flex;gap:18px;align-items:flex-start">
+        <div style="flex:1" data-aos="fade-up">
+          <h2>About <span class="accent">Me</span></h2>
+          <p style="color:var(--muted)">I am an eager B.Tech student specializing in Artificial Intelligence and Data Science. I enjoy transforming raw data into actionable insights through models, dashboards and interactive tools.</p>
+
+          <div class="about-stats" role="list" aria-label="Summary stats">
+            <div class="stat-card" role="listitem">
+              <i class="ri-code-box-line"></i>
+              <h3 style="margin:6px 0">3+</h3>
+              <p style="color:var(--muted)">Projects</p>
+            </div>
+            <div class="stat-card" role="listitem">
+              <i class="ri-briefcase-4-fill"></i>
+              <h3 style="margin:6px 0">2</h3>
+              <p style="color:var(--muted)">Internships</p>
+            </div>
+            <div class="stat-card" role="listitem">
+              <i class="ri-award-fill"></i>
+              <h3 style="margin:6px 0">4</h3>
+              <p style="color:var(--muted)">Certifications</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- skills visual -->
+        <div style="width:360px" data-aos="fade-left">
+          <div class="skills-visual">
+            <div class="skill-ring" aria-hidden>
+              <svg width="110" height="110" viewBox="0 0 36 36">
+                <defs>
+                  <linearGradient id="gA" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#00C9A7"/>
+                    <stop offset="100%" stop-color="#007CF0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="3"/>
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831" fill="none" stroke="url(#gA)" stroke-width="3" stroke-dasharray="75 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+                <text x="18" y="20.8" font-size="4" text-anchor="middle" fill="#dfeeff">88%</text>
+              </svg>
+            </div>
+
+            <div class="skill-list" aria-hidden>
+              <div class="skill-item"><div>Python / ML</div><div>88%</div></div>
+              <div class="bar" aria-hidden><i style="width:88%"></i></div>
+
+              <div class="skill-item"><div>Power BI</div><div>85%</div></div>
+              <div class="bar" aria-hidden><i style="width:85%"></i></div>
+
+              <div class="skill-item"><div>SQL / Databases</div><div>82%</div></div>
+              <div class="bar" aria-hidden><i style="width:82%"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK / JOURNEY -->
+    <section id="work" class="work" aria-label="Work">
+      <aside class="work-sidebar" data-aos="fade-right">
+        <div class="filter-group" role="navigation" aria-label="Filters">
+          <h3 style="margin:0 0 8px">Journey Book</h3>
+          <button class="filter-btn active" data-filter="all"><div><i class="ri-book-mark-fill"></i> All</div></button>
+          <button class="filter-btn" data-filter="education"><div><i class="ri-school-fill"></i> Education</div></button>
+          <button class="filter-btn" data-filter="experience"><div><i class="ri-briefcase-4-fill"></i> Experience</div></button>
+          <button class="filter-btn" data-filter="projects"><div><i class="ri-terminal-box-fill"></i> Projects</div></button>
+          <button class="filter-btn" data-filter="volunteer"><div><i class="ri-hand-heart-fill"></i> Volunteer</div></button>
+        </div>
+      </aside>
+
+      <div class="work-content" data-aos="fade-left">
+        <div style="display:flex;justify-content:space-between;align-items:end">
+          <h2 style="margin:0">My <span class="accent">Journey</span></h2>
+          <div style="color:var(--muted);font-size:13px">Filter cards to view categories</div>
+        </div>
+
+        <div class="work-grid" id="workGrid">
+          <!-- Example cards (education, experience, projects...) -->
+          <div class="work-card" data-category="education">
+            <div class="work-preview"><img src="krce campus.jfif" alt="K. Ramakrishnan College" loading="lazy"></div>
+            <div class="work-info">
+              <h3>AI & DS — B.Tech <span style="float:right;color:var(--muted);font-size:13px">2022 - 2026</span></h3>
+              <p>K. Ramakrishnan College of Engineering, Trichy — B.Tech (AI & Data Science)</p>
+            </div>
+          </div>
+
+          <div class="work-card" data-category="experience">
+            <div class="work-preview"><img src="vdart.png" alt="VDart Dashboard" loading="lazy"></div>
+            <div class="work-info">
+              <h3>Data Analyst — VDart <span style="float:right;color:var(--muted);font-size:13px">May - Jun 2025</span></h3>
+              <p>Built Power BI dashboards and reports to support business decisions.</p>
+            </div>
+          </div>
+
+          <div class="work-card" data-category="experience">
+            <div class="work-preview"><img src="vdart.png" alt="AI intern" loading="lazy"></div>
+            <div class="work-info">
+              <h3>AI / ML — VDart (Intern) <span style="float:right;color:var(--muted);font-size:13px">Aug 2025 - Present</span></h3>
+              <p>Preprocessing, feature engineering and model evaluation for predictive analytics.</p>
+            </div>
+          </div>
+
+          <div class="work-card" data-category="projects">
+            <div class="work-preview"><img src="chatbot" alt="Document Bot" loading="lazy"></div>
+            <div class="work-info">
+              <h3>Document Analysis Chatbot <span style="float:right;color:var(--muted);font-size:13px">2024</span></h3>
+              <p>Local question-answering system using embeddings & retrieval; prototype notebooks available.</p>
+            </div>
+          </div>
+
+          <div class="work-card" data-category="projects">
+            <div class="work-preview"><img src="e commerce" alt="Power BI Dashboard" loading="lazy"></div>
+            <div class="work-info">
+              <h3>E-Commerce Sales Dashboard <span style="float:right;color:var(--muted);font-size:13px">2024</span></h3>
+              <p>Interactive sales analytics and KPIs built in Power BI.</p>
+            </div>
+          </div>
+
+          <div class="work-card" data-category="projects">
+            <div class="work-preview"><img src="port.jpg" alt="Portfolio" loading="lazy"></div>
+            <div class="work-info">
+              <h3>Portfolio Site <span style="float:right;color:var(--muted);font-size:13px">2024</span></h3>
+              <p>Personal website to showcase projects and background (HTML/CSS/JS).</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SUMMARY -->
+    <section id="projects" style="margin-top:18px" data-aos="fade-up">
+      <div style="display:flex;justify-content:space-between;align-items:end">
+        <h2>Selected <span class="accent">Projects</span></h2>
+        <div style="color:var(--muted);font-size:13px">Code & demos on GitHub</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
+        <div class="panel" style="padding:16px">
+          <h3>Document Analysis Chatbot</h3>
+          <p style="color:var(--muted)">Embeddings + retrieval pipeline for document Q&A. Prototype notebooks and demos.</p>
+          <a href="https://github.com/Shaazis120204" target="_blank" rel="noopener">View →</a>
+        </div>
+        <div class="panel" style="padding:16px">
+          <h3>E-Commerce Dashboard</h3>
+          <p style="color:var(--muted)">Power BI dashboard for sales insights, drill-throughs and KPIs.</p>
+        </div>
+        <div class="panel" style="padding:16px">
+          <h3>Portfolio Website</h3>
+          <p style="color:var(--muted)">Personal site built with modern CSS & JS, deployed on GitHub Pages.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="margin-top:20px" data-aos="fade-up">
+      <div class="panel" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <h3>Let's <span class="accent">Connect</span></h3>
+          <p style="color:var(--muted)">Email: <a href="mailto:shaazisofficial02@gmail.com">shaazisofficial02@gmail.com</a><br>Phone: <a href="tel:+919629586513">+91 9629586513</a></p>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <a class="btn primary" href="mailto:shaazisofficial02@gmail.com"><i class="ri-mail-line"></i> Email</a>
+            <a class="btn ghost" href="Azzuu Normal Resume (3).pdf" download><i class="ri-download-2-line"></i> Download Resume</a>
+          </div>
+        </div>
+
+        <div style="min-width:220px">
+          <h4 style="margin:0 0 8px">Quick Links</h4>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a class="tech-badge" href="https://github.com/Shaazis120204" target="_blank" rel="noopener">GitHub</a>
+            <a class="tech-badge" href="https://www.linkedin.com/in/sha-azis-s-5ba26b24a/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <strong>Sha Azis Shanavas</strong>
+          <div style="color:var(--muted);font-size:13px">© <span id="year"></span> • Built with curiosity</div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <a class="tech-badge" href="https://github.com/Shaazis120204" target="_blank" rel="noopener">GitHub</a>
+          <a class="tech-badge" href="https://www.linkedin.com/in/sha-azis-s-5ba26b24a/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Assistant -->
+  <div class="ai-assistant-container" aria-hidden>
+    <div class="ai-assistant-bubble" id="assistantBubble" title="Open assistant" role="button" aria-pressed="false">
+      <i class="ri-robot-line" style="font-size:22px"></i>
+    </div>
+
+    <div class="ai-assistant-chat" id="assistantPanel" role="dialog" aria-label="AI Assistant">
+      <div class="chat-header">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));display:flex;align-items:center;justify-content:center;color:white">SA</div>
+          <div>
+            <strong>Sha Assistant</strong><br>
+            <span style="color:var(--muted);font-size:13px">Ask about projects, resume or links</span>
+          </div>
+        </div>
+        <div>
+          <button id="closeAssistant" class="nav-item" aria-label="Close"><i class="ri-close-line"></i></button>
+        </div>
+      </div>
+      <div class="chat-messages" id="assistantMessages">
+        <div style="color:var(--muted);font-size:14px">Hi 👋 — I can share project summaries or GitHub links.</div>
+      </div>
+      <div class="chat-input">
+        <textarea id="assistantInput" rows="1" placeholder="Type a question..." aria-label="Type a question"></textarea>
+        <button id="assistantSend" class="btn primary">Send</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Populate year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Hide loader on page load
+  window.addEventListener('load', ()=> {
+    const loader = document.getElementById('loaderWrapper');
+    loader.style.opacity = 0;
+    setTimeout(()=> loader.style.display = 'none', 450);
+  });
+
+  // Particles (emerald-teal network)
+  document.addEventListener('DOMContentLoaded', ()=> {
+    if(window.particlesJS){
+      particlesJS('particles-js', {
+        "particles": {
+          "number": {"value": 80, "density": {"enable": true, "value_area": 800}},
+          "color": {"value": ["#00C9A7","#007CF0","#00FFE2"]},
+          "shape": {"type":"circle"},
+          "opacity": {"value":0.75},
+          "size": {"value":2.6},
+          "line_linked": {"enable": true, "distance": 130, "color": "#00C9A7", "opacity": 0.06, "width": 1},
+          "move": {"speed":1.2, "out_mode":"bounce"}
+        },
+        "interactivity": {
+          "detect_on":"canvas",
+          "events": {"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":true,"mode":"push"}}
+        },
+        "retina_detect": true
+      });
+    }
+  });
+
+  // Typed.js in hero title
+  document.addEventListener('DOMContentLoaded', ()=> {
+    if(window.Typed){
+      new Typed('#typed-title', {
+        strings: ['AI & Data Science', 'Data Analyst', 'Web & Dashboard Developer'],
+        typeSpeed:65,backSpeed:40,backDelay:1400,loop:true,showCursor:true
+      });
+    }
+  });
+
+  // AOS init
+  document.addEventListener('DOMContentLoaded', ()=> { if(window.AOS) AOS.init({duration:700}); });
+
+  // Vanilla Tilt init
+  document.addEventListener('DOMContentLoaded', ()=> {
+    const tiltEls = document.querySelectorAll('[data-tilt]');
+    tiltEls.forEach(el => { if(window.VanillaTilt) VanillaTilt.init(el, {max:6, speed:600, glare:false}); });
+  });
+
+  // Filters
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const workCards = document.querySelectorAll('.work-card');
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      filterBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter || 'all';
+      workCards.forEach(c=>{
+        if(f==='all') c.style.display = '';
+        else c.style.display = (c.dataset.category===f ? '' : 'none');
+      });
+    });
+  });
+
+  // Assistant
+  const assistantBubble = document.getElementById('assistantBubble');
+  const assistantPanel = document.getElementById('assistantPanel');
+  const assistantClose = document.getElementById('closeAssistant');
+  const assistantSend = document.getElementById('assistantSend');
+  const assistantInput = document.getElementById('assistantInput');
+  const assistantMessages = document.getElementById('assistantMessages');
+
+  assistantBubble.addEventListener('click', ()=> {
+    const open = assistantPanel.classList.toggle('open');
+    assistantBubble.setAttribute('aria-pressed', open?'true':'false');
+  });
+  assistantClose.addEventListener('click', ()=> assistantPanel.classList.remove('open'));
+
+  function appendMsg(text, who='assistant'){
+    const div = document.createElement('div');
+    div.style.margin='8px 0'; div.style.padding='8px'; div.style.borderRadius='8px';
+    if(who==='user'){ div.style.background='linear-gradient(90deg, rgba(0,201,167,0.12), rgba(0,124,240,0.05))'; div.style.color='white'; div.textContent = text; }
+    else { div.style.color='var(--muted)'; div.textContent = text; }
+    assistantMessages.appendChild(div); assistantMessages.scrollTop = assistantMessages.scrollHeight;
+  }
+
+  assistantSend.addEventListener('click', ()=> {
+    const text = assistantInput.value.trim(); if(!text) return; appendMsg(text,'user'); assistantInput.value='';
+    setTimeout(()=> {
+      let resp = "I can summarize projects, provide GitHub links, or explain dashboards. Try 'Document Bot' or 'Show GitHub'.";
+      if(/document|chatbot|qa/i.test(text)) resp = "Document Bot: embeddings + retrieval approach, local inference prototype.";
+      else if(/power bi|dashboard/i.test(text)) resp = "Power BI Dashboard: sales analytics with filters and KPIs.";
+      else if(/portfolio|site/i.test(text)) resp = "Portfolio: responsive site built with HTML/CSS/JS, hosted on GitHub Pages.";
+      else if(/github|repo/i.test(text)) resp = "GitHub: https://github.com/Shaazis120204";
+      appendMsg(resp,'assistant');
+    },450);
+  });
+  assistantInput.addEventListener('keydown', (e)=> { if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); assistantSend.click(); } });
+
+  // keyboard toggle: Alt+M
+  document.addEventListener('keydown', (e)=> { if(e.altKey && e.key.toLowerCase()==='m'){ assistantPanel.classList.toggle('open'); } });
+
+  // Prefetch important images (perceived perf)
+  ['assets/images/vdart_dashboard.jpg','assets/images/docbot_thumb.jpg','assets/images/powerbi_thumb.jpg'].forEach(s=>{ const i=new Image(); i.src=s; });
+
+  // Smooth scrolling for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      const href = a.getAttribute('href');
+      if(href.length>1){ e.preventDefault(); const t=document.querySelector(href); if(t) t.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+</script>
+</body>
+</html>
